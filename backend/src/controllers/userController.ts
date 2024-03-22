@@ -12,7 +12,6 @@ import { assertIsDefine } from "../utils/assertIsDefine";
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
 
-  const getAuthenticatedUserId = req.session.userId;
 
   try {
 
@@ -66,7 +65,7 @@ interface User extends Document {
 }
 
 
-const getRegister = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const getRegister:RequestHandler = async (req, res, next): Promise<void> => {
   try {
     const { userName, email, passwd } = await req.body;
     if (!userName || !email || !passwd) {
@@ -126,7 +125,7 @@ interface IUser {
 }
 
 
-const getLogin = async (req:Request, res:Response, next:NextFunction) => {
+const getLogin:RequestHandler = async (req, res, next) => {
 
 
   // const userName = req.body.userName;

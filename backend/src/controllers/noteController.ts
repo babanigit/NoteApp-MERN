@@ -10,20 +10,17 @@ interface CreateNoteBody{
   text?:string;
 }
 
-export const getNotes =  async(req: Request, res: Response, next:NextFunction) => {
+export const getNotes:RequestHandler =  async(req, res, next) => {
 
-  const getAuthenticatedUserId = req.session.userId
+  const authenticatedUserId = req.session.userId;
 
     try {
       // throw createHttpError(401);
 
       // assertIsDefine(getAuthenticatedUserId)
 
-        const notes= await NoteModel.find(
-          {userId: getAuthenticatedUserId}
-          ).exec();
-        res.status(200).json(notes);
-
+      const notes = await NoteModel.find({ userId: authenticatedUserId }).exec();
+      res.status(200).json(notes);
 
         console.log("getNotes from noteController")
         console.log("session is " , req.session.userId , notes)
@@ -35,13 +32,13 @@ export const getNotes =  async(req: Request, res: Response, next:NextFunction) =
 
   }
 
-  export const getNote =  async(req: Request, res: Response, next:NextFunction) => {
+  export const getNote:RequestHandler =  async(req , res, next) => {
 
     const noteId= req.params.noteId;
     const getAuthenticatedUserId = req.session.userId
 
     try {
-      assertIsDefine(getAuthenticatedUserId)
+      // assertIsDefine(getAuthenticatedUserId)
 
 
       if(!mongoose.isValidObjectId(noteId)) throw createHttpError(400,"invalid note id")
@@ -67,12 +64,15 @@ export const getNotes =  async(req: Request, res: Response, next:NextFunction) =
     const getAuthenticatedUserId = req.session.userId
 
     try {
-      assertIsDefine(getAuthenticatedUserId)
+      // assertIsDefine(getAuthenticatedUserId)
 
+      console.log("create note session id",req.session.userId)
 
       if(!title) throw createHttpError(400,"note must have a title")
       const newNotes=await NoteModel.create({
+    
     userId:getAuthenticatedUserId, //here we stored new property "userId" which has req.session.userId
+    demo:"hello demo",
         title,
         text,
       })
@@ -91,11 +91,15 @@ export const getNotes =  async(req: Request, res: Response, next:NextFunction) =
 
     try {
 
-      assertIsDefine(getAuthenticatedUserId)
+      // assertIsDefine(getAuthenticatedUserId)
 
 
       if(!mongoose.isValidObjectId(noteId)) throw createHttpError(400,"invalid note id")
       if(!newTitle) throw createHttpError(400,"note must have a title")
+
+
+      console.log("create note session id",req.session.userId)
+
 
       const note=await NoteModel.findById(noteId).exec();
 
@@ -126,7 +130,8 @@ export const getNotes =  async(req: Request, res: Response, next:NextFunction) =
 
     try {
 
-      assertIsDefine(getAuthenticatedUserId)
+      // assertIsDefine(getAuthenticatedUserId)
+      console.log("create note session id",req.session.userId)
 
 
       if(!mongoose.isValidObjectId(noteId)) throw createHttpError(400,"invalid note id")

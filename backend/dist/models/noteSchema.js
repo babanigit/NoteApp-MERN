@@ -29,6 +29,10 @@ const noteSchema = new mongoose_1.default.Schema({
         type: mongoose_1.Schema.Types.ObjectId,
         require: true
     },
+    demo: {
+        type: String,
+        require: true
+    },
     title: {
         type: String,
         require: true

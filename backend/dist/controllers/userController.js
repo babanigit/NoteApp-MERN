@@ -18,7 +18,6 @@ const userSchema_1 = __importDefault(require("../models/userSchema"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const http_errors_1 = __importDefault(require("http-errors"));
 const getAuthenticatedUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const getAuthenticatedUserId = req.session.userId;
     try {
         // assertIsDefine(getAuthenticatedUserId);
         // if (!getAuthenticatedUserId) {
